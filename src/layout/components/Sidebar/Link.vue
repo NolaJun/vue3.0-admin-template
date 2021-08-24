@@ -4,7 +4,7 @@
   </component>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import {isExternal} from '@/utils/validate'
   import {onMounted, computed, getCurrentInstance, watch, ref, toRefs, reactive} from "vue";
   //获取store和router

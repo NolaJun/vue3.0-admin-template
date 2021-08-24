@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import {onMounted, getCurrentInstance, watch, ref, toRefs, reactive} from "vue";
   import settings from '@/settings'
   //获取store和router
@@ -77,7 +77,7 @@
     }
     &.collapse {
       .sidebar-logo {
-        margin-right: 0px;
+        margin-right: 0;
       }
     }
   }

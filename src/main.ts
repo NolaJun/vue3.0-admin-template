@@ -36,4 +36,7 @@ app.config.globalProperties.$momentMini=$momentMini
 //引入路由拦截器
 import "./permission"
 
+
+//引入ts
+import  "@/types/index.d.ts"
 app.use(router).mount("#app");

@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import {getCurrentInstance, computed} from 'vue'
   import Logo from './Logo'
   import SidebarItem from './SidebarItem'

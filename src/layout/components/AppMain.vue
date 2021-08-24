@@ -14,23 +14,10 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {onMounted, getCurrentInstance, watch,ref,toRefs,computed,reactive} from "vue";
-//获取store和router
-// import {useRouter} from 'vue-router'
-// import {useStore} from 'vuex'
-let {proxy} = getCurrentInstance();
-// const props = defineProps({
-//   name: {
-//     require: true,
-//     default: "fai",
-//     type:String,
-//   },
-// });
-// const state = reactive({
-//   levelList: null
-// });
 
+let {proxy} = getCurrentInstance();
 // string.instanceOf String
 const key = computed(() => {
   return proxy.$route.path
@@ -38,19 +25,7 @@ const key = computed(() => {
 const cachedViews = computed(() => {
   return proxy.$store.state.app.cachedViews
 });
-// const store = useStore()
-// const router = useRouter()
-// onMounted(()=>{
-//   let string=[]
-//   // console.log(proxy.$route)
-// })
-// let helloFunc = () => {
-//   console.log("helloFunc");
-// };
-//导出给refs使用
-// defineExpose({ helloFunc });
-//导出属性到页面中使用
-// let {levelList} = toRefs(state);
+
 </script>
 
 

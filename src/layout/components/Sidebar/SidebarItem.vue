@@ -24,7 +24,7 @@
   </template>
 </template>
 
-<script setup>
+<script setup lang="ts">
   /*初始化参数比如引入组件，proxy,state等*/
   import {reactive,defineComponent, getCurrentInstance, toRef, onMounted, watch, toRefs, computed} from "vue";
   import Link from './Link'

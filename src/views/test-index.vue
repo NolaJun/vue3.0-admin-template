@@ -6,7 +6,7 @@
   <!--<el-button type="primary">element-btn1111111111111111111111111</el-button>-->
 </template>
 
-<script  setup>
+<script  setup lang="ts">
 
 </script>
 

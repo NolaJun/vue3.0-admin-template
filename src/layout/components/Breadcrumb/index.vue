@@ -9,7 +9,7 @@
   </el-breadcrumb>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import {onMounted, onBeforeMount,getCurrentInstance, watch, ref, toRefs, reactive, computed} from "vue";
   import {compile} from 'path-to-regexp'
   //获取store和router

@@ -46,21 +46,21 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   /*可以设置默认的名字*/
   export default {
     name: 'Login'
   }
 </script>
 
-<script setup>
+<script setup lang="ts">
   /*
   * 初始化参数比如引入组件，proxy,state等
   * */
   import {reactive, getCurrentInstance, watch, toRefs, ref} from "vue";
   import {getToken, setToken, removeToken} from '@/utils/auth'
   import settings from '@/settings'
-
+  import  component from '@vue'
   let {proxy} = getCurrentInstance();
   //form表单
   let formInline = reactive({
@@ -70,7 +70,6 @@
   let onSubmit = () => {
     console.log('submit!');
   }
-
   /*
   * 监听路由变化处理
   * */

@@ -1,26 +1,28 @@
 import router,{ asyncRoutes,constantRoutes } from "@/router";
 import store from "./store";
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import {routerItem} from "@/types";
+
 router.beforeEach(async (to, from, next) => {
   /*
    * 正常流程如下:主要有两大点token和role
    * 1.是否与token 没有去登录页 ,有 如果要去登录页则重定向到首页。没有, 重新定向到登录页
    * 2.判断是否权限筛选,是,直接放行。没有，筛选动态路由后，添加动态路由然后放行，
    * */
-  let token = getToken();
+  let token:string = getToken();
   // console.log("token", token);
   if (token) {
     if (to.path === "/login") {
       next({ path: "/" });
     } else {
-      let isPermission = store.state.permission.isSettingPermission;
+      let isPermission:boolean = store.state.permission.isSettingPermission;
       // let isPermission = true
       if (isPermission) {
         next();
       } else {
         //过滤权限
-        let permissionCodeArr = await reqPermission();
-        let asyncRoutesAf = await filterPermissionFunc(
+        let permissionCodeArr:Array<number> = await reqPermission();
+        let asyncRoutesAf:Array<routerItem> = await filterPermissionFunc(
           permissionCodeArr,
           asyncRoutes
         );
@@ -49,17 +51,14 @@ router.beforeEach(async (to, from, next) => {
 });
 
 //权限过滤方法
-function filterPermissionFunc(permissionCodeArr, asyncRoutes) {
+function filterPermissionFunc(permissionCodeArr:Array<number>, asyncRoutes:Array<routerItem>):Promise<Array<routerItem>>{
   return new Promise(resolve => {
-    let filterRouter = [];
+    let filterRouter:Array<routerItem> = [];
     asyncRoutes.forEach(async routeItem => {
-      if (permissionCodeArr.includes(routeItem.code) || routeItem.hidden) {
+      if (routeItem.hidden) {
         //判断children
         if (routeItem.children) {
-          routeItem.children = await filterPermissionFunc(
-            permissionCodeArr,
-            routeItem.children
-          );
+          routeItem.children = await filterPermissionFunc(permissionCodeArr, routeItem.children);
         }
         filterRouter.push(routeItem);
       }
@@ -69,15 +68,9 @@ function filterPermissionFunc(permissionCodeArr, asyncRoutes) {
 }
 
 //此处模拟请求权限数据
-function reqPermission() {
+function reqPermission():Promise<Array<number>>{
   return new Promise(resolve => {
     resolve([1, 2, 3, 4, 5]);
-  });
-}
-//此处模拟登录后获取到的token
-function loginAfterToken() {
-  return new Promise(resolve => {
-    resolve(localStorage.getItem("jwtToken"));
   });
 }
 

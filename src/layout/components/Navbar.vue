@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import Breadcrumb from './Breadcrumb'
   import Hamburger from './Hamburger'
   import {onMounted, getCurrentInstance, computed, watch, ref, toRefs, reactive} from "vue";
@@ -46,7 +46,7 @@
   /*
   * 退出登录
   * */
-  let logutReq=()=>{
+  let logutReq:Promise<object>=()=>{
     return new Promise((resolve)=>{
       proxy.$axiosReq({
         url: '/ty-user/user/loginValid',
@@ -59,7 +59,7 @@
     })
 
   }
-  const logout = async () => {
+  const logout:void = async () => {
     // await logutReq();
     removeToken();
     proxy.$router.push(`/login?redirect=${proxy.$route.fullPath}`)
